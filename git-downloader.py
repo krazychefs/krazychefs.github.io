@@ -16,8 +16,9 @@ while has_records == True:
     if array and len(array) > 0:
         if array[0].has_key("imgUrls") and array[0]['imgUrls'] is not None and array[0]['imgUrls'] is not "None" and str(array[0]['imgUrls']) is not "":
             print array[0]['imgUrls']
-            if array[0]['_id'] is not None:
-                urllib.urlretrieve(array[0]['imgUrls'], array[0]['_id']+".jpg")
+            if array[0]['imgUrls'].index("githubusercontent") != -1:
+                if array[0]['_id'] is not None:
+                    urllib.urlretrieve(array[0]['imgUrls'], array[0]['_id']+".jpg")
         else:
             print "http://www.krazychefs.com/krazychefs/attachment/"+array[0]['imageId']
             try:
