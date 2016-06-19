@@ -10,7 +10,7 @@ start_index = 0;
 while has_records == True:
     end_index = start_index + 1
     url = "http://www.krazychefs.com/web/getrecord?start="+str(start_index)+"&end="+str(end_index)
-    response = urllib2.urlopen(url, timeout=4)
+    response = urllib2.urlopen(url)
     data = response.read()
     array = json.loads(data)
     if array and len(array) > 0:
@@ -19,11 +19,11 @@ while has_records == True:
             if array[0]['_id'] is not None:
                 urllib.urlretrieve(array[0]['imgUrls'], array[0]['_id']+".jpg")
         else:
-            print "http://www.krazychefs.com/krazychefs/attachment/"+array[0]['_id']
+            print "http://www.krazychefs.com/krazychefs/attachment/"+array[0]['imageId']
             try:
-                urllib.urlretrieve("http://www.krazychefs.com/krazychefs/attachment/"+array[0]['_id'], array[0]['_id']+".jpg")
+                urllib.urlretrieve("http://www.krazychefs.com/krazychefs/attachment/"+array[0]['imageId'], array[0]['_id']+".jpg")
             except:
-                print "Error: http://www.krazychefs.com/krazychefs/attachment/"+array[0]['_id']
+                print "Error: http://www.krazychefs.com/krazychefs/attachment/"+array[0]['imageId']
         start_index = end_index
     else:
         has_records = False
