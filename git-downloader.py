@@ -55,10 +55,17 @@ while has_records == True:
             if array[0]['_id'] is not None:
                 # print array[0]['steps'].decode('ascii', 'ignore')
                 print "audio/"+array[0]['_id']+".mp4"
-                value = "Ingredients"
+                value = cgi.escape(array[0]['title']).encode("ascii", "replace")
+                value = value + " . "
+                value = value + "Preparation time"
+                value = value + array[0]['prepTime']
+                value = value + " . "
+                value = value + "Ingredients"
                 value = value + cgi.escape(array[0]['ingredients']).encode("ascii", "replace")
+                value = value + " . "
                 value = value + "Preparation method"
                 value = value + cgi.escape(array[0]['steps']).encode("ascii", "replace")
+                value = cgi.escape(value).encode("ascii", "replace")
                 os.system("/usr/bin/say -v Victoria -o audio/"+array[0]['_id']+".mp4 \""+ value +"\"")
         start_index = end_index
     else:
